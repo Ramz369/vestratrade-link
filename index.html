@@ -7,7 +7,7 @@
 <title>Vestratrade</title>
 <style>
 body { margin:0; min-height:100vh; display:grid; place-items:center; font:14px ui-monospace,Menlo,monospace; background:#080c12; color:#edf1f6; }
-.box { text-align:center; line-height:1.9; max-width:34rem; padding:1rem; } .dim { opacity:.55; }
+.box { text-align:center; line-height:1.9; max-width:36rem; padding:1rem; } .dim { opacity:.55; }
 a.btn { display:inline-block; margin:.35rem; padding:.5rem 1rem; border:1px solid #2a3543; border-radius:3px; color:#6fa4d6; text-decoration:none; background:#121924; }
 a.btn:hover { border-color:#55677b; }
 </style>
@@ -15,25 +15,28 @@ a.btn:hover { border-color:#55677b; }
 <body>
 <div class="box">
   <div><strong>Vestratrade</strong> <span class="dim">terminal</span></div>
-  <div id="msg" class="dim">probing the fixed host…</div>
-  <div>
-    <a class="btn" href="https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true">open (fixed host)</a>
-    <a class="btn" href="https://cd4d096af10635.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79">open (fallback host)</a>
-  </div>
-  <div class="dim">fixed host: vestratrade.serveousercontent.com · fallback: cd4d096af10635.lhr.life</div>
+  <div id="msg" class="dim">finding a host your network can reach…</div>
+  <div><a class="btn" href="https://bearing-mercury-starsmerchant-recipes.trycloudflare.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79">open (cloudflare)</a><a class="btn" href="https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true">open (fixed host)</a><a class="btn" href="https://cd4d096af10635.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79">open (fallback)</a></div>
+  <div class="dim">cloudflare: bearing-mercury-starsmerchant-recipes.trycloudflare.com · fixed host: vestratrade.serveousercontent.com · fallback: cd4d096af10635.lhr.life</div>
 </div>
 <script>
+const HOSTS = [["https://bearing-mercury-starsmerchant-recipes.trycloudflare.com", "https://bearing-mercury-starsmerchant-recipes.trycloudflare.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79", "cloudflare"], ["https://vestratrade.serveousercontent.com", "https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true", "fixed host"], ["https://cd4d096af10635.lhr.life", "https://cd4d096af10635.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79", "fallback"]];
 (async () => {
-  const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 4000);
-  try {
-    await fetch('https://vestratrade.serveousercontent.com/api/health', { mode: "no-cors", cache: "no-store", signal: ctl.signal });
-    clearTimeout(timer);
-    location.replace('https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true');
-  } catch (e) {
-    clearTimeout(timer);
-    document.getElementById("msg").textContent = "the fixed host is not reachable from here, using the fallback";
-    location.replace('https://cd4d096af10635.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79');
+  const msg = document.getElementById("msg");
+  for (const [host, target, label] of HOSTS) {
+    const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 4000);
+    try {
+      await fetch(host + "/api/health", { mode: "no-cors", cache: "no-store", signal: ctl.signal });
+      clearTimeout(timer);
+      msg.textContent = "opening via " + label;
+      location.replace(target);
+      return;
+    } catch (e) {
+      clearTimeout(timer);
+      msg.textContent = label + " not reachable from here, trying the next host…";
+    }
   }
+  msg.textContent = "no host answered from your network; the buttons above try each directly";
 })();
 </script>
 </body>
