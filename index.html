@@ -16,11 +16,11 @@ a.btn:hover { border-color:#55677b; }
 <div class="box">
   <div><strong>Vestratrade</strong> <span class="dim">terminal</span></div>
   <div id="msg" class="dim">finding a host your network can reach…</div>
-  <div><a class="btn" href="https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true">open (fixed host)</a><a class="btn" href="https://78c7e4e5490cfe.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79">open (fallback)</a></div>
-  <div class="dim">fixed host: vestratrade.serveousercontent.com · fallback: 78c7e4e5490cfe.lhr.life</div>
+  <div><a class="btn" href="https://traditional-performances-volunteers-sapphire.trycloudflare.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79">open (cloudflare)</a><a class="btn" href="https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true">open (fixed host)</a><a class="btn" href="https://78c7e4e5490cfe.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79">open (fallback)</a></div>
+  <div class="dim">cloudflare: traditional-performances-volunteers-sapphire.trycloudflare.com · fixed host: vestratrade.serveousercontent.com · fallback: 78c7e4e5490cfe.lhr.life</div>
 </div>
 <script>
-const HOSTS = [["https://vestratrade.serveousercontent.com", "https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true", "fixed host"], ["https://78c7e4e5490cfe.lhr.life", "https://78c7e4e5490cfe.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79", "fallback"]];
+const HOSTS = [["https://traditional-performances-volunteers-sapphire.trycloudflare.com", "https://traditional-performances-volunteers-sapphire.trycloudflare.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79", "cloudflare"], ["https://vestratrade.serveousercontent.com", "https://vestratrade.serveousercontent.com/unlock/80c2ce9941b5c097a4cc4df36b7f3f79?serveo-skip-browser-warning=true", "fixed host"], ["https://78c7e4e5490cfe.lhr.life", "https://78c7e4e5490cfe.lhr.life/unlock/80c2ce9941b5c097a4cc4df36b7f3f79", "fallback"]];
 (async () => {
   const msg = document.getElementById("msg");
   for (const [host, target, label] of HOSTS) {
